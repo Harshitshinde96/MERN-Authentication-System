@@ -4,6 +4,7 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import { errorMiddleware } from "./middlewares/error.middleware.js";
 import dbConnect from "./config/db.js";
+import {authRouter}  from "./routes/authRoutes.js";
 
 const app = express();
 
@@ -21,12 +22,12 @@ app.use(express.urlencoded({ extended: true, limit: "16kb" }));
 app.use(express.static("public"));
 app.use(cookieParser());
 
-// Routes
+// API Endpoints
 app.get("/", (req, res) => {
   res.send("Auth system working");
 });
 
-// Import and use your actual routes here
+app.use("/api/auth", authRouter)
 
 
 // Global Error Middleware (MUST be after routes)
