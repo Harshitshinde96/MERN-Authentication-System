@@ -45,6 +45,6 @@ userSchema.methods.generateJWTToken = function () {
     expiresIn: process.env.JWT_EXPIRE || "7d",
   });
 };
-
+  
 const userModel = mongoose.models.user || mongoose.model("user", userSchema);
 export default userModel;
