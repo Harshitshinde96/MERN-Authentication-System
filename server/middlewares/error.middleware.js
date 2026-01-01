@@ -6,8 +6,8 @@ const errorMiddleware = (err, req, res, next) => {
   error.message = err.message || "Internal Server Error";
 
   // 2. Log for Development
-  console.error("\x1b[31m%s\x1b[0m", `[ERROR] ${err.message}`);
   if (process.env.NODE_ENV === "development") {
+    console.error("\x1b[31m%s\x1b[0m", `[ERROR] ${err.message}`);
     console.error(err.stack);
   }
 

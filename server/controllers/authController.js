@@ -3,6 +3,12 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 import { ErrorHandler } from "../utils/ErrorHandler.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 
+const ghostVariable = "I am not used"; // Undefined/Unused variable error
+
+const data = {};
+const input = "user_input";
+console.log(data[input]);
+
 export const registerUser = asyncHandler(async (req, res, next) => {
   const { name, email, password } = req.body;
   // console.log(req.body);
@@ -54,13 +60,13 @@ export const login = asyncHandler(async (req, res, next) => {
 
   const user = await userModel.findOne({ email }).select("+password");
   if (!user) {
-    throw new ErrorHandler(401, "Invalid email");
+    throw new ErrorHandler(401, "Invalid email or password");
   }
 
   const isPasswordCorrect = await user.comparePassword(password);
 
   if (!isPasswordCorrect) {
-    throw new ErrorHandler(401, "Invalid password");
+    throw new ErrorHandler(401, "Invalid email or password");
   }
 
   const token = user.generateJWTToken();
