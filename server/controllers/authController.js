@@ -3,13 +3,7 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 import { ErrorHandler } from "../utils/ErrorHandler.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 
-const ghostVariable = "I am not used"; // Undefined/Unused variable error
-
-const data = {};
-const input = "user_input";
-console.log(data[input]);
-
-export const registerUser = asyncHandler(async (req, res, next) => {
+export const registerUser = asyncHandler(async (req, res) => {
   const { name, email, password } = req.body;
   // console.log(req.body);
 
@@ -52,7 +46,7 @@ export const registerUser = asyncHandler(async (req, res, next) => {
     );
 });
 
-export const login = asyncHandler(async (req, res, next) => {
+export const login = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
   if (!email || !password) {
     throw new ErrorHandler(400, "Email and password are required!");
@@ -94,7 +88,7 @@ export const login = asyncHandler(async (req, res, next) => {
     );
 });
 
-export const logout = asyncHandler(async (req, res, next) => {
+export const logout = asyncHandler(async (req, res) => {
   const cookieOptions = {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
