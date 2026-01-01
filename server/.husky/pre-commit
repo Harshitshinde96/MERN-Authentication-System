@@ -1,0 +1,8 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+# Move into the server directory where your package.json and linter live
+cd server || exit
+
+# Run the linting check
+npx lint-staged
