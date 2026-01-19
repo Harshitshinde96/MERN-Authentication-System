@@ -46,5 +46,19 @@ userSchema.methods.generateJWTToken = function () {
   });
 };
   
+
+userSchema.set('toJSON', {
+    transform: (doc, ret) => {
+        delete ret.password;
+        delete ret.verifyOtp;
+        delete ret.verifyOtpExpireAt;
+        delete ret.resetOtp;
+        delete ret.resetOtpExpireAt;
+        delete ret.__v;
+        return ret;
+    }
+});
+
 const userModel = mongoose.models.user || mongoose.model("user", userSchema);
 export default userModel;
+

@@ -7,6 +7,7 @@
   "type": "module",
   "main": "server.js",
   "scripts": {
+    "dev": "node --import dotenv/config server.js",
     "start": "node server.js",
     "server": "nodemon server.js",
     "prepare": "husky"
@@ -34,8 +35,7 @@
   },
   "lint-staged": {
     "*.{js,mjs,cjs}": [
-      "eslint --fix",
-      "prettier --write"
+      "eslint --fix"
     ]
   }
 }
