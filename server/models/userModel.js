@@ -47,8 +47,11 @@ userSchema.methods.generateJWTToken = function () {
 };
   
 
+// Inside userModel.js
 userSchema.set('toJSON', {
     transform: (doc, ret) => {
+        ret.id = ret._id.toString(); // Map _id to id for the frontend
+        delete ret._id;              // Remove the original _id
         delete ret.password;
         delete ret.verifyOtp;
         delete ret.verifyOtpExpireAt;
