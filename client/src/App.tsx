@@ -1,7 +1,12 @@
 import { Outlet } from "react-router-dom";
 import { Toaster } from "react-hot-toast"; // Import Toaster
+import { Suspense } from "react";
 
-function App() {
+const LoadingSpinner = () => (
+  <div className="flex items-center justify-center min-h-screen bg-neutral-950 text-white">
+    <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-cyan-500"></div>
+  </div>
+);function App() {
   return (
     <>
       <Toaster
@@ -14,10 +19,10 @@ function App() {
         }}
       />
 
-      {/* 2. Your Page Content */}
-      <div>
+      {/* 2. Wrap Outlet in Suspense */}
+      <Suspense fallback={<LoadingSpinner />}>
         <Outlet />
-      </div>
+      </Suspense>
     </>
   );
 }

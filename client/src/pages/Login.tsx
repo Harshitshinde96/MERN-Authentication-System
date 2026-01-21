@@ -8,7 +8,6 @@ import { useAppContext } from "@/context/AppContext";
 import api from "@/api/axios";
 import toast from "react-hot-toast";
 
-// --- Helper Components ---
 const BottomGradient = () => (
   <>
     <span className="absolute inset-x-0 -bottom-px block h-px w-full bg-linear-to-r from-transparent via-cyan-500 to-transparent opacity-0 transition duration-500 group-hover/btn:opacity-100" />
@@ -16,12 +15,19 @@ const BottomGradient = () => (
   </>
 );
 
-const LabelInputContainer = ({ children, className }: { children: React.ReactNode; className?: string }) => (
-  <div className={`flex w-full flex-col space-y-2 ${className || ""}`}>{children}</div>
+const LabelInputContainer = ({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) => (
+  <div className={`flex w-full flex-col space-y-2 ${className || ""}`}>
+    {children}
+  </div>
 );
 
 const Login = () => {
-
   const { setIsLoggedIn, getUserData } = useAppContext();
 
   const navigate = useNavigate();
@@ -30,31 +36,34 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
- const onSubmitHandler = async (e: React.FormEvent) => {
+  const onSubmitHandler = async (e: React.FormEvent) => {
     e.preventDefault();
 
     try {
       if (state === "Sign Up") {
         // --- REGISTER FLOW ---
-        const { data } = await api.post('/auth/register', { name, email, password });
-        
+        const { data } = await api.post("/auth/register", {
+          name,
+          email,
+          password,
+        });
+
         if (data.success) {
           setIsLoggedIn(true);
           await getUserData(); // Fetch user profile immediately
-          navigate('/');       // Go to Home Page
+          navigate("/"); // Go to Home Page
           toast.success("Account created successfully!");
         } else {
           toast.error(data.message);
         }
-
       } else {
         // --- LOGIN FLOW ---
-        const { data } = await api.post('/auth/login', { email, password });
+        const { data } = await api.post("/auth/login", { email, password });
 
         if (data.success) {
           setIsLoggedIn(true);
           await getUserData(); // Fetch user profile immediately
-          navigate('/');       // Go to Home Page
+          navigate("/"); // Go to Home Page
           toast.success("Welcome back!");
         } else {
           toast.error(data.message);
@@ -68,7 +77,6 @@ const Login = () => {
   return (
     <AuthLayout>
       <div className="w-full mx-auto rounded-xl md:rounded-2xl p-6 md:p-8 shadow-[0_0_40px_-10px_rgba(255,255,255,0.03)] bg-neutral-900/40 backdrop-blur-md border border-white/10 relative overflow-hidden">
-        
         {/* Subtle inner shine */}
         <div className="absolute top-0 left-0 w-full h-1 bg-linear-to-r from-transparent via-white/10 to-transparent" />
 
@@ -77,17 +85,18 @@ const Login = () => {
             {state === "Sign Up" ? "Create your account" : "Welcome back"}
           </h2>
           <p className="text-neutral-400 text-sm mt-2">
-            {state === "Sign Up" 
-              ? "Join us to secure your digital galaxy." 
+            {state === "Sign Up"
+              ? "Join us to secure your digital galaxy."
               : "Enter your credentials to access your account."}
           </p>
         </div>
 
         <form className="space-y-4" onSubmit={onSubmitHandler}>
-          
           {state === "Sign Up" && (
             <LabelInputContainer>
-              <Label htmlFor="fullname" className="text-neutral-300">Full Name</Label>
+              <Label htmlFor="fullname" className="text-neutral-300">
+                Full Name
+              </Label>
               <Input
                 id="fullname"
                 placeholder="Star Lord"
@@ -101,7 +110,9 @@ const Login = () => {
           )}
 
           <LabelInputContainer>
-            <Label htmlFor="email" className="text-neutral-300">Email Address</Label>
+            <Label htmlFor="email" className="text-neutral-300">
+              Email Address
+            </Label>
             <Input
               id="email"
               placeholder="user@galaxy.com"
@@ -114,7 +125,9 @@ const Login = () => {
           </LabelInputContainer>
 
           <LabelInputContainer>
-            <Label htmlFor="password" className="text-neutral-300">Password</Label>
+            <Label htmlFor="password" className="text-neutral-300">
+              Password
+            </Label>
             <Input
               id="password"
               placeholder="••••••••"
@@ -128,8 +141,8 @@ const Login = () => {
 
           {state === "Login" && (
             <div className="flex justify-end">
-              <p 
-                onClick={() => navigate('/reset-password')}
+              <p
+                onClick={() => navigate("/reset-password")}
                 className="text-xs text-cyan-400 hover:text-cyan-300 cursor-pointer transition-colors font-medium"
               >
                 Forgot Password?
@@ -156,14 +169,20 @@ const Login = () => {
             {state === "Sign Up" ? (
               <>
                 Already have an account?{" "}
-                <span onClick={() => setState("Login")} className="text-cyan-400 hover:text-cyan-300 cursor-pointer font-bold transition-colors ml-1">
+                <span
+                  onClick={() => setState("Login")}
+                  className="text-cyan-400 hover:text-cyan-300 cursor-pointer font-bold transition-colors ml-1"
+                >
                   Login here
                 </span>
               </>
             ) : (
               <>
                 Don't have an account?{" "}
-                <span onClick={() => setState("Sign Up")} className="text-cyan-400 hover:text-cyan-300 cursor-pointer font-bold transition-colors ml-1">
+                <span
+                  onClick={() => setState("Sign Up")}
+                  className="text-cyan-400 hover:text-cyan-300 cursor-pointer font-bold transition-colors ml-1"
+                >
                   Sign up
                 </span>
               </>

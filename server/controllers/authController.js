@@ -3,6 +3,10 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 import { ErrorHandler } from "../utils/ErrorHandler.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import transporter from "../config/nodemailer.js";
+import {
+  EMAIL_VERIFY_TEMPLATE,
+  PASSWORD_RESET_TEMPLATE,
+} from "../config/emailTemplates.js";
 
 export const registerUser = asyncHandler(async (req, res, next) => {
   const { name, email, password } = req.body;
@@ -156,7 +160,11 @@ export const sendVerifyOtp = asyncHandler(async (req, res, next) => {
     from: process.env.SMTP_FROM_EMAIL,
     to: user.email,
     subject: "Account verification OTP | MERN Auth System",
-    text: `Your OTP is ${otp}. Use this code to verify your account. It is valid for 24 hours.`,
+    // text: `Your OTP is ${otp}. Use this code to verify your account. It is valid for 24 hours.`,
+    html: EMAIL_VERIFY_TEMPLATE.replace("{{otp}}", otp).replace(
+      "{{email}}",
+      user.email,
+    ),
   };
 
   try {
@@ -164,13 +172,13 @@ export const sendVerifyOtp = asyncHandler(async (req, res, next) => {
     return res
       .status(200)
       .json(new ApiResponse(200, {}, "Verification OTP Sent on Email"));
-  } catch  {
+  } catch {
     // If mail fails, clear the OTP so the user can try again
     user.verifyOtp = "";
     user.verifyOtpExpireAt = 0; // Fixed: Use numeric value instead of boolean
     await user.save();
     return next(
-      new ErrorHandler(500, "Email could not be sent. Please try again later." ),
+      new ErrorHandler(500, "Email could not be sent. Please try again later."),
     );
   }
 });
@@ -250,7 +258,11 @@ export const sendResetOtp = asyncHandler(async (req, res, next) => {
     from: process.env.SMTP_FROM_EMAIL,
     to: user.email,
     subject: "Password Reset OTP | MERN Auth System",
-    text: `Your OTP for resetting your password is ${otp}. Use this OTP to proceed with resetting your password. It is valid for 15 Minutes.`,
+    // text: `Your OTP for resetting your password is ${otp}. Use this OTP to proceed with resetting your password. It is valid for 15 Minutes.`,
+    html: PASSWORD_RESET_TEMPLATE.replace("{{otp}}", otp).replace(
+      "{{email}}",
+      user.email,
+    ),
   };
 
   try {
@@ -258,7 +270,7 @@ export const sendResetOtp = asyncHandler(async (req, res, next) => {
     return res
       .status(200)
       .json(new ApiResponse(200, {}, "Password reset OTP Sent on Email"));
-  } catch{
+  } catch {
     // If mail fails, clear the OTP so the user can try again
     user.resetOtp = "";
     user.resetOtpExpireAt = 0; // Fixed: Use numeric value instead of boolean

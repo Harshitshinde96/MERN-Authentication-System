@@ -7,3 +7,4 @@ export const assets: {
   hand_wave: string;
   header_img: string;
 };
+

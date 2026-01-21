@@ -1,13 +1,15 @@
-import { StrictMode } from "react";
+import { StrictMode, lazy } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.tsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Home from "./pages/Home.tsx";
-import Login from "./pages/Login.tsx";
-import EmailVerify from "./pages/EmailVerify.tsx";
-import ResetPassword from "./pages/ResetPassword.tsx";
 import { AppContextProvider } from "./context/AppContext.tsx";
+
+// 2. Convert standard imports to lazy imports
+const Home = lazy(() => import("./pages/Home.tsx"));
+const Login = lazy(() => import("./pages/Login.tsx"));
+const EmailVerify = lazy(() => import("./pages/EmailVerify.tsx"));
+const ResetPassword = lazy(() => import("./pages/ResetPassword.tsx"));
 
 const router = createBrowserRouter([
   {
@@ -33,6 +35,7 @@ const router = createBrowserRouter([
     ],
   },
 ]);
+
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <AppContextProvider>

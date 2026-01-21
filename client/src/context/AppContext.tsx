@@ -43,16 +43,19 @@ export const AppContextProvider = (props: { children: ReactNode }) => {
 
   const getUserData = async () => {
     try {
-      const { data } = await api.get("/user/data");
+      const { data } = await api.get('/user/data');
       if (data.success) {
         setUserData(data.data.user);
         setIsLoggedIn(true);
-      } else {
-        // Don't toast error here, or it will pop up every time a guest visits
-        // Just fail silently for guests
       }
     } catch (error: any) {
-      console.log("No active session found");
+      if (error.response?.status === 401) {
+         setIsLoggedIn(false);
+         setUserData(null);
+         // console.log("Guest user"); // Optional log
+      } else {
+         toast.error(error.response?.data?.message || "Error fetching data");
+      }
     }
   };
 
