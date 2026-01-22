@@ -168,7 +168,7 @@ const EmailVerify = () => {
           </div>
 
           <button
-            className="relative group/btn flex items-center justify-center gap-2 w-full bg-white text-black rounded-xl h-11 font-bold text-sm shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] hover:bg-neutral-200 transition-all duration-300"
+            className="relative group/btn flex items-center justify-center gap-2 w-full bg-white text-black rounded-xl h-11 font-bold text-sm shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] hover:bg-neutral-200 transition-all duration-300 cursor-pointer"
             type="submit"
           >
             Verify Email
