@@ -61,7 +61,7 @@ const Navbar = () => {
             className="flex items-center group cursor-pointer"
           >
             <img
-              src={assets.logo}
+              src={assets.logo1}
               alt="Logo"
               className="w-28 sm:w-32 transition-transform duration-300 group-hover:scale-105 opacity-90 hover:opacity-100"
             />
@@ -109,7 +109,7 @@ const Navbar = () => {
                 >
                   <IconLogout
                     size={18}
-                    className="text-neutral-300 group-hover:text-white"
+                    className="text-neutral-300 group-hover:text-white cursor-pointer "
                   />
                 </button>
               </div>

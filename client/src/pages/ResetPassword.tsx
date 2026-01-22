@@ -45,7 +45,7 @@ const EmailStep = ({ email, setEmail, onSubmit, isLoading }: any) => (
     </div>
     <button
       disabled={isLoading} // DISABLE BUTTON TO PREVENT DOUBLE CLICK
-      className="relative group/btn flex items-center justify-center gap-2 w-full bg-white text-black rounded-xl h-11 font-bold text-sm hover:bg-neutral-200 transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed"
+      className="relative group/btn flex items-center justify-center gap-2 w-full bg-white text-black rounded-xl h-11 font-bold text-sm hover:bg-neutral-200 transition-all duration-300 disabled:opacity-70 cursor-pointer"
     >
       {isLoading ? (
         <IconLoader2 className="animate-spin w-5 h-5" />
@@ -134,7 +134,7 @@ const OtpStep = ({ otp, setOtp, onSubmit, isLoading }: any) => {
       </div>
       <button
         disabled={isLoading}
-        className="relative group/btn flex items-center justify-center gap-2 w-full bg-white text-black rounded-xl h-11 font-bold text-sm hover:bg-neutral-200 transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed"
+        className="relative group/btn flex items-center justify-center gap-2 w-full bg-white text-black rounded-xl h-11 font-bold text-sm hover:bg-neutral-200 transition-all duration-300 disabled:opacity-70 cursor-pointer"
       >
         {isLoading ? (
           <IconLoader2 className="animate-spin w-5 h-5" />
@@ -184,7 +184,7 @@ const NewPasswordStep = ({
     </div>
     <button
       disabled={isLoading}
-      className="relative group/btn flex items-center justify-center gap-2 w-full bg-white text-black rounded-xl h-11 font-bold text-sm hover:bg-neutral-200 transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed"
+      className="relative group/btn flex items-center justify-center gap-2 w-full bg-white text-black rounded-xl h-11 font-bold text-sm hover:bg-neutral-200 transition-all duration-300 disabled:opacity-70 cursor-pointer"
     >
       {isLoading ? (
         <IconLoader2 className="animate-spin w-5 h-5" />

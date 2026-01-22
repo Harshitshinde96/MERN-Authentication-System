@@ -28,9 +28,9 @@ const AuthLayout = ({ children }: AuthLayoutProps) => {
       <div className="absolute top-8 left-8 z-50">
         <img
           onClick={() => navigate("/")}
-          src={assets.logo}
+          src={assets.logo1}
           alt="Logo"
-          className="w-28 sm:w-32 cursor-pointer transition-transform duration-300 hover:scale-105 opacity-90 hover:opacity-100"
+          className="w-26 sm:w-32 cursor-pointer transition-transform duration-300 hover:scale-105 opacity-90 hover:opacity-100"
         />
       </div>
 
