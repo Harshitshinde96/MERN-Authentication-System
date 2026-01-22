@@ -172,8 +172,9 @@ export const sendVerifyOtp = asyncHandler(async (req, res, next) => {
     return res
       .status(200)
       .json(new ApiResponse(200, {}, "Verification OTP Sent on Email"));
-  } catch {
+  } catch (error){
     // If mail fails, clear the OTP so the user can try again
+    console.error("CRITICAL EMAIL ERROR:", error);
     user.verifyOtp = "";
     user.verifyOtpExpireAt = 0; // Fixed: Use numeric value instead of boolean
     await user.save();
@@ -270,8 +271,9 @@ export const sendResetOtp = asyncHandler(async (req, res, next) => {
     return res
       .status(200)
       .json(new ApiResponse(200, {}, "Password reset OTP Sent on Email"));
-  } catch {
+  } catch (error){
     // If mail fails, clear the OTP so the user can try again
+    console.error("CRITICAL EMAIL ERROR:", error);
     user.resetOtp = "";
     user.resetOtpExpireAt = 0; // Fixed: Use numeric value instead of boolean
     await user.save();
