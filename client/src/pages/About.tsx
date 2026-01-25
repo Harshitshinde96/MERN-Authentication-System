@@ -101,9 +101,9 @@ const About: React.FC = () => {
 
               {/* Avatar */}
               <div className="relative mb-6">
-                <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-full blur-xl opacity-50"></div>
+                <div className="absolute inset-0 bg-linear-to-r from-cyan-500 to-purple-500 rounded-full blur-xl opacity-50"></div>
                 <div className="relative w-24 h-24 rounded-full bg-neutral-950 border-2 border-white/10 flex items-center justify-center text-3xl font-bold text-white shadow-xl z-10">
-                  <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-purple-500">
+                  <span className="bg-clip-text text-transparent bg-linear-to-r from-cyan-400 to-purple-500">
                     HS
                   </span>
                 </div>
