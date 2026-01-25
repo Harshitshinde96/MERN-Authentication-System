@@ -4,6 +4,7 @@ import "./index.css";
 import App from "./App.tsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { AppContextProvider } from "./context/AppContext.tsx";
+import About from "./pages/About.tsx";
 
 // 2. Convert standard imports to lazy imports
 const Home = lazy(() => import("./pages/Home.tsx"));
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
       {
         path: "reset-password",
         element: <ResetPassword />,
+      },
+      {
+        path: "about",
+        element: <About />,
       },
     ],
   },

@@ -19,8 +19,8 @@ const Navbar = () => {
 
   const navItems = [
     { name: "Home", link: "/", icon: <IconHome size={20} /> },
-    { name: "About", link: "/", icon: <IconUser size={20} /> },
-    { name: "Contact", link: "/", icon: <IconMessage size={20} /> },
+    { name: "About", link: "/about", icon: <IconUser size={20} /> },
+    { name: "Contact", link: "/about", icon: <IconMessage size={20} /> },
   ];
 
   // Logout Logic
