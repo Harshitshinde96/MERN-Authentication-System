@@ -6,20 +6,25 @@ const LoadingSpinner = () => (
   <div className="flex items-center justify-center min-h-screen bg-neutral-950 text-white">
     <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-cyan-500"></div>
   </div>
-);function App() {
+);
+function App() {
   return (
     <>
       <Toaster
         position="top-right"
+        containerStyle={{
+          // Ensure the container itself doesn't block clicks
+          pointerEvents: "none",
+        }}
         toastOptions={{
           style: {
             background: "#333",
             color: "#fff",
+            // Allow clicking the actual toast popups
+            pointerEvents: "auto",
           },
         }}
       />
-
-      {/* 2. Wrap Outlet in Suspense */}
       <Suspense fallback={<LoadingSpinner />}>
         <Outlet />
       </Suspense>

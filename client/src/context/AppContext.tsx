@@ -43,19 +43,19 @@ export const AppContextProvider = (props: { children: ReactNode }) => {
 
   const getUserData = async () => {
     try {
-      const { data } = await api.get('/user/data');
+      const { data } = await api.get("/user/data");
       if (data.success) {
         setUserData(data.data.user);
         setIsLoggedIn(true);
       }
     } catch (error: any) {
-      if (error.response?.status === 401) {
-         setIsLoggedIn(false);
-         setUserData(null);
-         // console.log("Guest user"); // Optional log
-      } else {
-         toast.error(error.response?.data?.message || "Error fetching data");
+      if (error.response && error.response.status === 401) {
+        setIsLoggedIn(false);
+        setUserData(null);
+        return; // Stop execution here
       }
+
+      toast.error(error.response?.data?.message || error.message);
     }
   };
 
