@@ -29,6 +29,10 @@ app.get("/", (req, res) => {
   res.send("Auth system working");
 });
 
+app.get("/health", (req, res) => {
+  res.status(200).send("OK");
+});
+
 app.use("/api/auth", authRouter);
 app.use("/api/user", userRouter);
 
